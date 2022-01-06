@@ -3,15 +3,16 @@
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 </head>
 <body>
-	<button id="bh" onclick="getBH()">Click me</button>
+	<button id="btn" onclick="getBH()">Click me</button>
 	
 	<script type="module">
 		const provider = new ethers.providers.Web3Provider(window.ethereum)
 		const signer = provider.getSigner()
 		
-		async function getBH() {
-			document.getElementById("bh").innerHTML = await provider.getBlockNumber();
-		}
+		var btn = document.getElementById("btn");
+		btn.addEventListener("click", async function() {
+			document.getElementById("btn").innerHTML = await provider.getBlockNumber();
+		}, false);
 	</script>
 </body>
 </html>
