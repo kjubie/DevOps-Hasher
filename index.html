@@ -8,8 +8,9 @@
 	<button id="blc">Balance</button>
 	
 	<script type="module">
-		const provider = new ethers.providers.Web3Provider(window.ethereum)
-		const signer = provider.getSigner()
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		await provider.send("eth_requestAccounts", []);
+		const signer = provider.getSigner();
 		
 		var btn = document.getElementById("btn");
 		btn.addEventListener("click", async function() {
@@ -18,7 +19,7 @@
 		
 		var blc = document.getElementById("blc");
 		blc.addEventListener("click", async function() {
-			document.getElementById("blc").innerHTML = await provider.getBalance("account1.eth");
+			document.getElementById("blc").innerHTML = await provider.getBalance(await signer.getAddress());
 		}, false);
 	</script>
 </body>
