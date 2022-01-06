@@ -8,7 +8,7 @@
 	<button id="blc">Balance</button>
 	
 	<script type="module">
-		const abi = require(abi.json);
+		const abi = require('abi.json');
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		await provider.send("eth_requestAccounts", []);
 		const signer = provider.getSigner();
