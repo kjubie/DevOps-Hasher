@@ -308,7 +308,7 @@
 		
 		var blc = document.getElementById("blc");
 		blc.addEventListener("click", async function() {
-			document.getElementById("blc").innerHTML = await contract.balanceOf((await signer.address)).toString();
+			document.getElementById("blc").innerHTML = await contract.balanceOf(signer.address).toString();
 		}, false);
 	</script>
 </body>
