@@ -7,6 +7,13 @@
 <body>
 	<button id="bh" onclick="getBH()">Click me</button>
 	
-	
+	<script type="module">
+		const provider = new ethers.providers.Web3Provider(window.ethereum)
+		const signer = provider.getSigner()
+		
+		async function getBH() {
+			document.getElementById("bh").innerHTML = await provider.getBlockNumber();
+		}
+	</script>
 </body>
 </html>
