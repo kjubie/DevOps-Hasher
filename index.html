@@ -11,6 +11,7 @@
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		await provider.send("eth_requestAccounts", []);
 		const signer = provider.getSigner();
+		const contract = new ethers.Contract(0xf88dA701e15Fdc274d682aBa5BA5A1D824ffD906, genericErc20Abi, provider);
 		
 		var btn = document.getElementById("btn");
 		btn.addEventListener("click", async function() {
@@ -19,7 +20,7 @@
 		
 		var blc = document.getElementById("blc");
 		blc.addEventListener("click", async function() {
-			document.getElementById("blc").innerHTML = await provider.getBalance(await signer.getAddress());
+			document.getElementById("blc").innerHTML = (await contract.balanceOf((await provider.getSigners())[0].address)).toString();
 		}, false);
 	</script>
 </body>
