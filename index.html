@@ -3,7 +3,9 @@
 	<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
 </head>
 <body>
-	<button id="btn">Click me</button>
+	<button id="btn">Block Height</button>
+	
+	<button id="blc">Balance</button>
 	
 	<script type="module">
 		const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -12,6 +14,11 @@
 		var btn = document.getElementById("btn");
 		btn.addEventListener("click", async function() {
 			document.getElementById("btn").innerHTML = await provider.getBlockNumber();
+		}, false);
+		
+		var blc = document.getElementById("blc");
+		blc.addEventListener("click", async function() {
+			document.getElementById("blc").innerHTML = await provider.getBalance("account1.eth");
 		}, false);
 	</script>
 </body>
