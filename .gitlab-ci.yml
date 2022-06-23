@@ -1,0 +1,57 @@
+default:
+  image: node:14-alpine
+
+stages: 
+  
+  - lint
+  - test
+  - build
+  - deploy
+  
+before_script:
+  - npm install  
+  
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+unit-test-job:
+  tags:
+    - tag   
+  stage: test   
+  script:
+    - echo "Running unit tests..."
+    - npm run test
+
+
+lint-test-job:
+  tags:
+    - tag   
+  stage: test    
+  script:
+    - echo "Linting code..."
+    - npm run lint
+
+build-job:
+  tags:
+    - tag      
+  stage: build
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+  script:
+    - echo "Compiling the code..."
+    - npm run build
+    - docker build --pull -t "$CI_REGISTRY_USER/$CI_REGISTRY_IMAGE" .
+
+deploy-job:
+  tags:
+    - tag      
+  image: docker:latest
+  stage: deploy  
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+  script:
+    - docker push "docker.io/$CI_REGISTRY_USER/$CI_REGISTRY_IMAGE"
+  only:
+    - main
