@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "hasher frontend",
   "main": "app.js",
+  "source": "src/app.js",
+  "output": "dist/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "parcel build",
+    "lint": "eslint app.js",
+    "test": "jest --detectOpenHandles",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -18,14 +23,17 @@
   "homepage": "https://github.com/kjubie/DevOps-Hasher-Frontend#readme",
   "devDependencies": {
     "chai": "^4.3.6",
-    "eslint": "^8.17.0",
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.2",
     "eslint-plugin-promise": "^6.0.0",
+    "jest": "^28.1.1",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
+    "parcel": "^2.6.2",
     "prettier": "2.6.2"
   },
   "dependencies": {
